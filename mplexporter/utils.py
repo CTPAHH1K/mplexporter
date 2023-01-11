@@ -33,6 +33,7 @@ def _many_to_one(input_dict):
                 for keys, val in input_dict.items()
                 for key in keys)
 
+
 LINESTYLES = _many_to_one({('solid', '-', (None, None)): 'none',
                            ('dashed', '--'): "6,6",
                            ('dotted', ':'): "2,2",
@@ -174,7 +175,7 @@ def get_text_style(text):
     style['color'] = color_to_hex(text.get_color())
     style['halign'] = text.get_horizontalalignment()  # left, center, right
     style['valign'] = text.get_verticalalignment()  # baseline, center, top
-    style['malign'] = text._multialignment # text alignment when '\n' in text
+    style['malign'] = text._multialignment  # text alignment when '\n' in text
     style['rotation'] = text.get_rotation()
     style['zorder'] = text.get_zorder()
     return style
@@ -238,7 +239,7 @@ def get_axis_properties(axis):
 
 def get_grid_style(axis):
     gridlines = axis.get_gridlines()
-    if axis._gridOnMajor and len(gridlines) > 0:
+    if axis._major_tick_kw['gridOn'] and len(gridlines) > 0:
         color = color_to_hex(gridlines[0].get_color())
         alpha = gridlines[0].get_alpha()
         dasharray = get_dasharray(gridlines[0])
@@ -263,7 +264,7 @@ def get_axes_properties(ax):
              'dynamic': ax.get_navigate(),
              'axison': ax.axison,
              'frame_on': ax.get_frame_on(),
-             'patch_visible':ax.patch.get_visible(),
+             'patch_visible': ax.patch.get_visible(),
              'axes': [get_axis_properties(ax.xaxis),
                       get_axis_properties(ax.yaxis)]}
 
